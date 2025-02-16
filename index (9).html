@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ 
+  <!-- Project -->
+  <script src="main.js"></script>
+<style>
+    * { 
+        user-select: none; 
+        -webkit-user-select: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        -webkit-tap-highlight-color: transparent; 
+    }
+    a, button {
+        text-decoration: none;
+        outline: none;
+        border: none;
+        background: none;
+        color: inherit;
+    }
+    a:focus, button:focus {
+        outline: none;
+        box-shadow: none;
+    }
+</style>
+  
+  
+  
+  
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
+
+
+  
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popups Simultâneos</title>
+    <style>
+        /* Popup 1 */
+        .premium-popup {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 90%;
+            max-width: 500px;
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 12px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .premium-popup.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .premium-popup.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(100%);
+        }
+
+        .premium-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        .premium-info {
+            color: white;
+            flex-grow: 1;
+        }
+
+        .premium-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .premium-description {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+
+        .premium-button {
+            margin-top: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: black;
+            background: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+        .premium-button:hover {
+            background: #f1f1f1;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Popup 2 */
+        .premium-popup-compact {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 320px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .premium-popup-compact.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .premium-popup-compact.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(100%);
+        }
+
+        .premium-info-compact {
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .premium-button-compact {
+            padding: 4px 8px;
+            font-size: 12px;
+            color: black;
+            background: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+        .premium-button-compact:hover {
+            background: #f1f1f1;
+        }
+
+        .close-popup-compact {
+            background: none;
+            border: none;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Popup 1 -->
+    <div class="premium-popup" id="premiumPopup">
+        <button class="close-popup" onclick="closePopup('premiumPopup')">×</button>
+        <img class="premium-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" alt="Premium">
+        <div class="premium-info">
+            <div class="premium-title">Acesso Premium</div>
+            <div class="premium-description">🔹 Benefícios exclusivos para membros VIP.</div>
+            <button class="premium-button" onclick="enterPremium()">Saiba Mais</button>
+        </div>
+    </div>
+
+    <!-- Popup 2 -->
+    <div class="premium-popup-compact" id="premiumPopupCompact">
+        <span class="premium-info-compact">Acesso Premium 🚀</span>
+        <button class="premium-button-compact" onclick="enterPremium()">Saiba Mais</button>
+        <button class="close-popup-compact" onclick="closePopup('premiumPopupCompact')">×</button>
+    </div>
+
+    <script>
+        // Função para redirecionar para página de Premium
+        function enterPremium() {
+            window.location.href = 'https://chat.whatsapp.com/PREMIUM';
+        }
+
+        // Função para fechar o popup
+        function closePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.classList.add("hide");
+            setTimeout(() => popup.classList.remove("show", "hide"), 300);
+        }
+
+        // Função para mostrar popup no horário certo
+        function showPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.classList.add("show");
+
+            // Fecha o popup após 10 segundos
+            setTimeout(() => closePopup(popupId), 10000);
+        }
+
+        // Função para verificar a data e exibir os popups
+        function checkPopupDisplay() {
+            const now = new Date();
+            const currentHour = now.getHours();
+
+            // Popup 1 (Horários: 9h e 18h)
+            if (currentHour === 9 || currentHour === 18) {
+                if (!localStorage.getItem('popup1Shown')) {
+                    showPopup('premiumPopup');
+                    localStorage.setItem('popup1Shown', 'true');
+                }
+            }
+
+            // Popup 2 (Horários: 12h e 21h)
+            if (currentHour === 12 || currentHour === 21) {
+                if (!localStorage.getItem('popup2Shown')) {
+                    showPopup('premiumPopupCompact');
+                    localStorage.setItem('popup2Shown', 'true');
+                }
+            }
+        }
+
+        // Reset popups à meia-noite para o próximo dia
+        function resetPopupsForNewDay() {
+            const now = new Date();
+            const currentHour = now.getHours();
+
+            if (currentHour === 0) {
+                localStorage.removeItem('popup1Shown');
+                localStorage.removeItem('popup2Shown');
+            }
+        }
+
+        // Verificar a exibição de popups ao carregar a página
+        document.addEventListener("DOMContentLoaded", () => {
+            checkPopupDisplay();
+            resetPopupsForNewDay();
+        });
+    </script>
+
+</body>
+</html>
+  
+
+
+
+  
+  
+<style>
+    body {
+        background: radial-gradient(circle at top, #1a1a1a, #000);
+        background-attachment: fixed;
+        color: #fff;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://www.transparenttextures.com/patterns/circuit-board.png'); /* Textura sutil */
+        opacity: 0.05;
+        pointer-events: none;
+    }
+
+    body::after {
+        content: "";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+        transform: translate(-50%, -50%);
+        filter: blur(100px);
+        opacity: 0.3;
+        pointer-events: none;
+    }
+</style>
+
+<style>
+  .header-title {
+    display: block;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: #ddd;
+    letter-spacing: 2px;
+    margin-top: 40px;
+  }
+
+  .header-slogan {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #888;
+    margin-top: 5px;
+  }
+</style>
+
+<span class="header-title">ANAHERA</span>
+<span class="header-slogan">Forjando lendas, conquistando o impossível.</span>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+  .recruitment {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .recruitment-background {
+    width: 100%;
+    max-width: 450px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    position: absolute;
+    border-radius: 10px;
+    top: 5px;
+    left: 5px;
+  }
+
+  .recruitment a {
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 450px;
+    height: 200px;
+  }
+
+  .recruitment img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .recruitment-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    color: #ddd;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .group-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+    }
+
+    .group-wrapper {
+        position: relative;
+        width: 99%;
+        max-width: 1000px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .group-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+        z-index: -1;
+        transition: background 0.3s ease;
+    }
+
+    .group-item {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: height 0.3s ease, opacity 0.3s ease;
+        background: url('https://wallpapers.com/images/high/cuphead-background-0faigtfvbmfn98nt.webp') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        text-align: left;
+        opacity: 1;
+    }
+
+
+
+    .group-photo {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        margin-right: 16px;
+        margin-top: -10px; /* Move a foto um pouco para cima */
+    }
+
+    .group-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        flex-grow: 1;
+    }
+
+    .group-title {
+        font-size: 18px;
+        margin-top: 1%;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+
+    .group-extra {
+        opacity: 0;
+        font-size: 14px;
+        margin-top: -40px;
+        transition: opacity 0.3s ease;
+    }
+
+.group-photo,
+.group-info {
+    transition: transform 0.5s ease;
+}
+
+.expanded .group-photo {
+    transform: translateY(-65px) scale(1.2); /* Sobe mais e aumenta */
+}
+
+.expanded .group-info {
+    transform: translateY(-60px); /* Sobe quase igual à foto */
+}
+
+.expanded .group-extra {
+    margin-top: -10px; /* Aproxima a descrição do nome */
+}
+
+
+
+    .group-button {
+        opacity: 0;
+        padding: 8px 16px;
+        font-size: 14px;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease, opacity 0.3s ease;
+        margin-top: 12px;
+        align-self: flex-start;
+    }
+
+
+/* Fundos personalizados */
+.custom-bg-1 {
+     position: relative;
+        width: 100%;
+        height: 100px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: height 0.3s ease, opacity 0.3s ease;
+        background: url('https://i.pinimg.com/736x/a6/2e/bc/a62ebcbf599979148ff2aff40b221094.jpg') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        text-align: left;
+        opacity: 1;
+}
+
+.custom-bg-2 {
+    position: relative;
+        width: 100%;
+        height: 100px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: height 0.3s ease, opacity 0.3s ease;
+        background: url('') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        text-align: left;
+        opacity: 1;
+}
+
+    .group-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .group-hint {
+        font-size: 12px;
+        opacity: 0.8;
+        margin-top: 4px;
+        transition: opacity 0.3s ease;
+    }
+
+    .expanded {
+        height: 200px !important;
+    }
+
+    .expanded .group-background {
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+.group-photo,
+.group-info {
+    transition: transform 0.5s ease;
+}
+
+.expanded .group-photo {
+    transform: translateY(-60px) scale(1.2); /* Sobe mais e aumenta um pouco */
+}
+
+.expanded .group-info {
+    transform: translateY(-45px); /* Mantém o nome alinhado */
+}
+
+.expanded .group-title {
+    margin-top: -5px;
+}
+
+    .expanded .group-extra,
+    .expanded .group-button {
+        opacity: 1;
+    }
+
+    .expanded .group-hint {
+        opacity: 0;
+    }
+
+    .group-list .group-wrapper:not(.expanded) {
+        opacity: 0.5;
+    }
+  .premium .group-item {
+    background: none !important; /* Remove o fundo padrão */
+}
+
+.premium .group-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Mantém no fundo */
+}
+
+.premium-1 .group-background {
+    background: url('https://i.pinimg.com/originals/e4/91/20/e49120099b11cd1537999e93060194d5.gif') center/cover no-repeat !important;
+}
+
+.premium-2 .group-background {
+    background: url('URL_DA_IMAGEM_2') center/cover no-repeat !important;
+}
+
+.premium-3 .group-background {
+    background: url('URL_DA_IMAGEM_3') center/cover no-repeat !important;
+}
+</style>
+
+<div class="group-list">
+    <div class="group-wrapper premium premium-1" data-whatsapp="https://chat.whatsapp.com/EWdnosAFBndDWNCeu2AVCn">
+        <div class="group-background"></div>
+        <div class="group-item" onclick="toggleExpand(event, this)">
+            <img class="group-photo" src="https://i.ibb.co/jP8rj0Yh/Screenshot-2025-02-13-13-04-57-619-com-whatsapp-edit.jpg" alt="Grupo Alpha">
+            <div class="group-info">
+                <div class="group-title">TRICK OR TREAT 🍬🎃</div>
+                <div class="group-hint">Clique para ver mais detalhes</div>
+                <div class="group-extra">🔹 Memes e Humor</div>
+                <button class="group-button" onclick="event.stopPropagation(); enterGroup(this)">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="group-wrapper" data-whatsapp="https://chat.whatsapp.com/BSIw9qGbxCpKKcNjjHQQr4">
+        <div class="group-background"></div>
+        <div class="group-item" onclick="toggleExpand(event, this)">
+            <img class="group-photo" src="https://pps.whatsapp.net/v/t61.24694-24/425577296_777512714362587_9116977757860340334_n.jpg?ccb=11-4&oh=01_Q5AaIOaBdHkm7t3iV1-IgHldD3dbKvCwf9WBEYeHkvPDKn-2&oe=67BCDAC1&_nc_sid=5e03e0&_nc_cat=100" alt="Grupo Beta">
+            <div class="group-info">
+                <div class="group-title">请阅读 I 𝘄𝗮𝗻𝗻𝗮 𝖇𝖊 your s̶l̶a̶v̶e̶</div>
+                <div class="group-hint">Clique para ver mais detalhes</div>
+                <div class="group-extra">🔹 Amizades</div>
+                <button class="group-button" onclick="event.stopPropagation(); enterGroup(this)">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="group-wrapper" data-whatsapp="https://wa.me/5585997374043?text=Olá!%20Gostaria%20de%20divulgar%20meu%20grupo.%20Poderia%20me%20passar%20os%20detalhes?">
+        <div class="group-background"></div>
+        <div class="custom-bg-1" onclick="toggleExpand(event, this)">
+            <div class="group-info">
+                <div class="group-title">adicione seu grupo</div>
+                <div class="group-hint">Clique para ver mais detalhes</div>
+                <div class="group-extra">Quer mais membros? Poste seu link!</div>
+                <button class="group-button" onclick="event.stopPropagation(); enterGroup(this)">cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleExpand(event, element) {
+        const isExpanding = !element.classList.contains('expanded');
+
+        document.querySelectorAll('.group-item').forEach(item => {
+            item.classList.remove('expanded');
+        });
+
+        document.querySelectorAll('.group-wrapper').forEach(wrapper => {
+            wrapper.classList.remove('expanded');
+            wrapper.style.opacity = "0.5"; 
+        });
+
+        if (isExpanding) {
+            element.classList.add('expanded');
+            element.parentElement.classList.add('expanded');
+            element.parentElement.style.opacity = "1"; 
+        }
+    }
+
+    function enterGroup(button) {
+        const groupWrapper = button.closest('.group-wrapper');
+        if (groupWrapper) {
+            const groupLink = groupWrapper.getAttribute('data-whatsapp');
+            if (groupLink) {
+                window.location.href = groupLink;
+            }
+        }
+    }
+    document.addEventListener("click", function (event) {
+    const expandedItem = document.querySelector(".group-item.expanded");
+    
+    if (expandedItem && !expandedItem.contains(event.target)) {
+        expandedItem.classList.remove("expanded");
+        expandedItem.parentElement.classList.remove("expanded");
+        document.querySelectorAll('.group-wrapper').forEach(wrapper => {
+            wrapper.style.opacity = "0.5";
+        });
+    }
+});
+let closeTimeout;
+let lastExpanded;
+
+function toggleExpand(event, element) {
+  event.stopPropagation();
+
+  const isExpanding = !element.classList.contains('expanded');
+
+  // Fecha todos os grupos antes de abrir um novo (exceto custom-bg-1 se já estiver aberto)
+  document.querySelectorAll('.group-item').forEach(item => {
+    if (!item.classList.contains('custom-bg-1') || item !== lastExpanded) {
+      item.classList.remove('expanded');
+    }
+  });
+
+  document.querySelectorAll('.group-wrapper').forEach(wrapper => {
+    wrapper.classList.remove('expanded');
+    wrapper.style.opacity = "0.5";
+  });
+
+  if (isExpanding) {
+    element.classList.add('expanded');
+    element.parentElement.classList.add('expanded');
+    element.parentElement.style.opacity = "1";
+
+    // Se for custom-bg-1, mantém aberto por 5 segundos
+    if (element.classList.contains('custom-bg-1')) {
+      clearTimeout(closeTimeout);
+      lastExpanded = element;
+      closeTimeout = setTimeout(() => {
+        if (lastExpanded === element) {
+          element.classList.remove('expanded');
+          element.parentElement.classList.remove('expanded');
+        }
+      }, 5000);
+    }
+  }
+}
+
+// Fecha ao clicar fora (exceto custom-bg-1 enquanto estiver no timer)
+document.addEventListener("click", function(event) {
+  document.querySelectorAll('.group-item.expanded').forEach(item => {
+    if (!item.contains(event.target) && !item.classList.contains('custom-bg-1')) {
+      item.classList.remove('expanded');
+      item.parentElement.classList.remove('expanded');
+      document.querySelectorAll('.group-wrapper').forEach(wrapper => {
+        wrapper.style.opacity = "1";
+      });
+    }
+  });
+});
+
+</script>
+
+<script>
+  let closeTimeout;
+  let lastExpanded;
+
+  function toggleExpand(event, element) {
+    event.stopPropagation();
+
+    if (element.classList.contains('expanded')) return;
+
+    document.querySelectorAll('.group-item').forEach(item => {
+      if (!item.classList.contains('custom-bg-1')) {
+        item.classList.remove('expanded');
+      }
+    });
+
+    element.classList.add('expanded');
+
+    if (element.classList.contains('custom-bg-1')) {
+      clearTimeout(closeTimeout);
+      lastExpanded = element;
+      closeTimeout = setTimeout(() => {
+        if (lastExpanded === element) {
+          element.classList.remove('expanded');
+        }
+      }, 5000);
+    }
+  }
+</script>
+
+
+<script>
+  function enterGroup(button) {
+    button.textContent = "Entrando no grupo...";
+    button.disabled = true;
+
+    setTimeout(() => {
+      window.location.href = button.closest(".group-wrapper").dataset.whatsapp;
+      button.textContent = "Entrar";
+      button.disabled = false;
+    }, 1000);
+  }
+  
+</script>
+
+
+
+
+
+
+
+
+
+<style>
+    .banner-wrapper {
+        position: relative;
+        width: 99%;
+        max-width: 1000px;
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: height 0.3s ease;
+        height: 120px; /* Altura padrão */
+        background: url('https://via.placeholder.com/1000x300') center/cover no-repeat;
+    }
+
+    .banner-expanded {
+        height: 300px !important; /* Expande bem mais que os grupos */
+    }
+
+    .banner-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        font-size: 19px;
+        font-weight: bold;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .banner-expanded .banner-content {
+        opacity: 0;
+    }
+
+    .banner-extra {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .banner-expanded .banner-extra {
+        opacity: 1;
+    }
+
+    .banner-button {
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.3s ease;
+    }
+
+    .banner-button:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+</style>
+
+<div class="group-list">
+    <!-- Banner de anúncios -->
+    <div class="banner-wrapper" onclick="toggleBanner(this)">
+        <div class="banner-content">Descubra tudo que o site oferece! 🔥</div>
+        <div class="banner-extra">
+            <p>Explore nossos grupos, participe da comunidade e aproveite conteúdos exclusivos.</p>
+            <button class="banner-button" onclick="event.stopPropagation(); window.location.href='https://seusite.com';">Saiba mais</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleBanner(element) {
+        element.classList.toggle("banner-expanded");
+    }
+</script>
+
+
+
+
+
+</body>
+</html>
